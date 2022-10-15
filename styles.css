@@ -88,6 +88,11 @@ body {
   background-color: cornflowerblue;
 }
 
+.task--card__time {
+  display: flex;
+  background-color: wheat;
+}
+
 .card--description {
   display: flex;
   flex-wrap: wrap;
