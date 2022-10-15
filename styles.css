@@ -50,8 +50,10 @@ body {
   border-radius: var(--mainBorderRadius);
 }
 
-.task--list__container {
+.task--box:hover {
+  box-shadow: 0px 5px 14px -6px var(--darkBlueColor);
 }
+
 
 
 
