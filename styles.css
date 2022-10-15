@@ -83,7 +83,16 @@ body {
 
 .task--card__description {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: cornflowerblue;
+}
+
+.card--description {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+  background-color: violet;
 }
 
 .box--container {
