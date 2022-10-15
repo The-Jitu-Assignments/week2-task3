@@ -61,14 +61,16 @@ body {
   box-shadow: 0px 5px 14px -6px var(--darkBlueColor);
 }
 
-.task--card {
-  display: flex;
-  flex: 1;
-  background-color: coral;
-}
-
 .task--item__details {
   background-color: chartreuse;
+}
+
+.task--item__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background-color: rgb(151, 57, 20);
 }
 
 .box--container {
