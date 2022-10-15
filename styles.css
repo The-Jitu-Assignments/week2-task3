@@ -69,7 +69,7 @@ body {
   overflow-y: scroll;
 }
 
-.task--item {
+.task--card {
   border: 1px solid var(--blueColor);
   border-radius: var(--mainBorderRadius);
   height: 10rem;
