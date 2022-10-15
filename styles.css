@@ -8,6 +8,7 @@
   --primaryColor: #ffffff;
   --secondaryColor:  #c2c2d6;
   --blueColor: #4747d1;
+  --darkBlueColor:  #000033;
 }
 
 body {
@@ -27,6 +28,7 @@ body {
   height: 70px;
   color: var(--primaryColor);
   background-color: var(--blueColor);
+  box-shadow: 0px 3px 20px -2px var(--darkBlueColor);
 }
 
 .header h1 {
