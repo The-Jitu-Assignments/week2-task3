@@ -95,8 +95,7 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: aqua;
-  height: 2rem;
+  gap: var(--mainGap);
 }
 
 .btn--container {
