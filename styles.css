@@ -6,9 +6,10 @@
 
 :root {
   --primaryColor: #ffffff;
-  --secondaryColor:  #c2c2d6;
+  --secondaryColor:  #e4e4eb;
   --blueColor: #4747d1;
   --darkBlueColor:  #000033;
+  --mainBorderRadius: 7px;
 }
 
 body {
@@ -42,4 +43,15 @@ body {
   height: calc(100vh - 100px);
   margin: 15px;
 }
+
+.task--box {
+  width: 50%;
+  background-color: var(--primaryColor);
+  border-radius: var(--mainBorderRadius);
+}
+
+.task--list__container {
+}
+
+
 
