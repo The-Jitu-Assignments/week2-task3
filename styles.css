@@ -1,4 +1,29 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
+
+:root {
+  --primaryColor: #ffffff;
+  --secondaryColor:  #c2c2d6;
+  --blueColor: #4747d1;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  background-color: var(--secondaryColor);
+}
+
+.header {
+  height: 70px;
+  color: var(--primaryColor);
+  background-color: var(--blueColor);
+}
+
