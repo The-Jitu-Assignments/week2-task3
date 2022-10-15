@@ -9,7 +9,7 @@
   --secondaryColor:  #e4e4eb;
   --blueColor: #4747d1;
   --darkBlueColor:  #000033;
-  --mainBorderRadius: 7px;
+  --mainBorderRadius: 5px;
   --mainGap: 15px;
   --mainTransition: all .3s linear;
 }
@@ -59,6 +59,13 @@ body {
 
 .task--box:hover {
   box-shadow: 0px 5px 14px -6px var(--darkBlueColor);
+}
+
+.task--item {
+  border: 1px solid var(--blueColor);
+  border-radius: var(--mainBorderRadius);
+  height: auto;
+  padding: 10px;
 }
 
 .form--item {
