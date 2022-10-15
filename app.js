@@ -1,9 +1,8 @@
 const data = [];
 
 class Interface {
-  name = 'john'
-  displayTasks(products) {
-
+  displayTasks(tasks) {
+    let results = '';
   }
 }
 
