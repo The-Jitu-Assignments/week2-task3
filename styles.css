@@ -71,7 +71,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+}
+
+.task--status {
+  padding: 5px 10px;
+  color: var(--primaryColor);
+  background-color: var(--darkBlueColor);
 }
 
 .task--card__description {
