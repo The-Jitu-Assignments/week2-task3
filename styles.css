@@ -61,16 +61,10 @@ body {
   box-shadow: 0px 5px 14px -6px var(--darkBlueColor);
 }
 
-
 .task--card {
   display: flex;
   flex-direction: column;
   gap: var(--mainGap);
-  background-color: crimson;
-}
-
-.task--item__details {
-  background-color: chartreuse;
 }
 
 .task--item__header {
@@ -78,27 +72,29 @@ body {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  background-color: rgb(151, 57, 20);
 }
 
 .task--card__description {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: cornflowerblue;
+}
+
+.delete--icon {
+  width: 25px;
+  color: red;
+  cursor: pointer;
 }
 
 .task--card__time {
   display: flex;
   justify-content: space-between;
-  background-color: wheat;
 }
 
 .card--description {
   display: flex;
   flex-wrap: wrap;
   flex: 1;
-  background-color: violet;
 }
 
 .box--container {
