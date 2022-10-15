@@ -2,8 +2,30 @@ const data = [];
 
 class Interface {
   name = 'john'
+  displayTasks(products) {
+
+  }
 }
 
-const ui = new Interface();
+class Tasks {
+  async fetchTasks() {
+    try {
+      let results = await fetch('tasks.json');
+      let data = await results.json();
+      let tasks = data.tasks;
+      return tasks;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
 
-console.log(ui.name);;
+
+document.addEventListener('DOMContentLoaded', () => {
+  const ui = new Interface();
+  const tasks = new Tasks();
+
+  tasks.fetchTasks().then((tasks) => {
+    console.log(tasks);
+  })
+})
