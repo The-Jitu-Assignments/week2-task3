@@ -22,8 +22,15 @@ body {
 }
 
 .header {
+  display: flex;
+  align-items: center;
   height: 70px;
   color: var(--primaryColor);
   background-color: var(--blueColor);
+}
+
+.header h1 {
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
