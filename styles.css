@@ -61,10 +61,19 @@ body {
   box-shadow: 0px 5px 14px -6px var(--darkBlueColor);
 }
 
+.task--container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mainGap);
+  background-color: violet;
+  height: calc(100% - 30px);
+  overflow-y: scroll;
+}
+
 .task--item {
   border: 1px solid var(--blueColor);
   border-radius: var(--mainBorderRadius);
-  height: auto;
+  height: 10rem;
   padding: 10px;
 }
 
