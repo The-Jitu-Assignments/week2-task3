@@ -90,6 +90,7 @@ body {
 
 .task--card__time {
   display: flex;
+  justify-content: space-between;
   background-color: wheat;
 }
 
