@@ -87,7 +87,7 @@ body {
 
 .delete--icon {
   width: 25px;
-  color: red;
+  color: var(--blueColor);
   cursor: pointer;
 }
 
