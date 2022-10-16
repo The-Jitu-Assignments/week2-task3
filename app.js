@@ -55,6 +55,15 @@ class Interface {
     });
     taskCardContainer.innerHTML = results
   }
+};
+
+class Storage {
+  static saveTasks(tasks) {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  };
+  // static getTask(id) {
+  //   let tasks =
+  // }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
