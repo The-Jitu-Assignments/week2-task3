@@ -1,4 +1,8 @@
 const taskCardContainer = document.querySelector(".task--container");
+const title = document.querySelector(".title");
+const description = document.querySelector(".title");
+const completionDate = document.querySelector(".completion--date");
+
 
 class Tasks {
   async fetchTasks() {
