@@ -13,6 +13,7 @@
       "id": "2",
       "title": "Second Task",
       "description": "Added a first task",
+      "completionStatus": "incomplete",
       "createdDate": "15/10/2022",
       "completionDate": "20/10/2022",
       "submitDate": "18/10/2022"
@@ -21,6 +22,7 @@
       "id": "3",
       "title": "Third Task",
       "description": "Added a first task",
+      "completionStatus": "incomplete",
       "createdDate": "15/10/2022",
       "completionDate": "20/10/2022",
       "submitDate": "18/10/2022"
@@ -29,6 +31,7 @@
       "id": "4",
       "title": "First Task",
       "description": "Added a first task",
+      "completionStatus": "complete",
       "createdDate": "15/10/2022",
       "completionDate": "20/10/2022",
       "submitDate": "18/10/2022"
@@ -37,6 +40,7 @@
       "id": "5",
       "title": "First Task",
       "description": "Added a first task",
+      "completionStatus": "incomplete",
       "createdDate": "15/10/2022",
       "completionDate": "20/10/2022",
       "submitDate": "18/10/2022"
@@ -45,6 +49,7 @@
       "id": "6",
       "title": "First Task",
       "description": "Added a first task",
+      "completionStatus": "complete",
       "createdDate": "15/10/2022",
       "completionDate": "20/10/2022",
       "submitDate": "18/10/2022"
