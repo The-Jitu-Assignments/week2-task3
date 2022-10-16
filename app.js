@@ -2,6 +2,9 @@ const taskCardContainer = document.querySelector(".task--container");
 const title = document.querySelector(".title");
 const description = document.querySelector(".title");
 const completionDate = document.querySelector(".completion--date");
+const submittionDate = document.querySelector(".submittion--date");
+const notCompleted = document.querySelector(".not--completed");
+const completed = document.querySelector(".completed");
 
 
 class Tasks {
