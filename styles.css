@@ -16,18 +16,18 @@
 
 body {
   width: 100%;
-  height: 100%;
+  height: auto;
 }
 
 .container {
   width: 100%;
-  height: 100vh;
-  background-color: var(--secondaryColor);
+  height: auto;
 }
 
 .header {
   display: flex;
   align-items: center;
+  justify-content: center;
   height: 70px;
   color: var(--primaryColor);
   background-color: var(--blueColor);
@@ -42,7 +42,6 @@ body {
 .content {
   display: flex;
   gap: var(--mainGap);
-  height: calc(100vh - 100px);
   margin: 15px;
 }
 
@@ -51,6 +50,8 @@ body {
   background-color: var(--primaryColor);
   border-radius: var(--mainBorderRadius);
   padding: 15px;
+  height: 550px;
+  box-shadow: 0px 3px 20px -2px var(--darkBlueColor);
 }
 
 .task--box__header {
@@ -175,6 +176,21 @@ body {
   background-color: transparent;
   color: var(--blueColor);
   border: 1px solid var(--blueColor);
+}
+
+@media screen and (max-width: 890px) { 
+  .container {
+    height: 100%;
+  }
+
+  .content {
+    flex-direction: column;
+  }
+
+  .task--box {
+    width: 100%;
+    height: 420px;
+  }
 }
 
 
