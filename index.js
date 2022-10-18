@@ -99,7 +99,7 @@ const tasksUI = (data) => {
               </div>
               <div class="task--days">
                 <span>By:</span>
-              <span class="task--status">${diffDays}-days</span>
+              <span class="task--status">${diffDays > 1 ? diffDays + ' days': diffDays + ' day'}</span>
               </div>
             </div>
           </div>
