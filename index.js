@@ -6,6 +6,8 @@ const submissionDate = document.querySelector(".submission--date");
 const form = document.querySelector(".form");
 const errorMessage = document.querySelectorAll(".error--msg");
 const completeElement = document.getElementsByName('task_completion');
+const taskCheckbox = document.querySelector("#task--checkbox");
+const taskHeader = document.querySelector(".task--item__header");
 
 let completionStatus = '';
 
@@ -43,8 +45,8 @@ const AddTask = () => {
     title: title.value,
     description: description.value,
     completionDate: completionDate.value,
-    completionStatus: completionStatus,
-    submissionDate: submissionDate.value
+    completionStatus: false,
+    // submissionDate: submissionDate.value
   });
 
   localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -60,22 +62,42 @@ const displayTasks = () => {
 };
 
 const tasksUI = (data) => {
+  let checkedStatus = false;
   let results = '';
+
+  if (data.length === 0) {
+    results = `<div class="task--empty">
+      😟 Currently you do not have any task.
+    </div>`
+  }
   data.map((task) => {
     let taskStatus = '';
+    if (task.completionStatus) {
+      checkedStatus = true
+    } else {
+      checkedStatus = false;
+    }
     let difference = new Date(task.submissionDate) - new Date(task.completionDate);
-    const diffDays = Math.ceil(Math.abs(difference) / (1000 * 60 * 60 * 24));
+    let diffDays = Math.ceil(Math.abs(difference) / (1000 * 60 * 60 * 24));
     if (difference < 0) {
       taskStatus = 'Submitted on Time';
-    } else {
+    } else if (difference === 0) {
+      diffDays = 1;
+      taskStatus = 'Submitted on Time';
+    }
+    else {
       taskStatus = 'Submitted Late';
     };
+
+    console.log(checkedStatus)
+
+    // <span class="task--status">${task.completionStatus}</span>
     if (data) {
       results += `
           <div class="task--card" id=${task.id}>
             <div class="task--item__header">
             <h3>${task.title}</h3>
-              <span class="task--status">${task.completionStatus}</span>
+            <input type="checkbox" onchange="editStatus(this)" id="task--checkbox" ${checkedStatus ? 'checked' : ''}>
           </div>
             <div class="task--card__description">
               <p class="card--description">
@@ -104,10 +126,29 @@ const tasksUI = (data) => {
             </div>
           </div>
       `;
-      taskCardContainer.innerHTML = results;
     } 
   })
-  // taskCardContainer.innerHTML = results;
+  taskCardContainer.innerHTML = results;
+}
+
+const editStatus = (e) => {
+  let selected = e.parentElement.parentElement;
+  let selectedHeader = selected.children[0];
+  let inputBox = selectedHeader.children[1];
+
+
+  if (inputBox.checked) {
+    console.log('cheked')
+  } else {
+    console.log('unchecked')
+  }
+  console.log(selectedHeader.children[1]);
+  tasks = JSON.parse(localStorage.getItem('tasks'));
+  const foundTask = tasks.find((task) => task.id === selected.id);
+
+  tasks = tasks.map((task) => task.id === foundTask.id ? { ...task, completionStatus: true } : task);
+
+  localStorage.setItem('tasks', JSON.stringify(tasks))
 }
 
 // update task details
@@ -148,27 +189,33 @@ const resetForm = () => {
   title.value = "";
   description.value = "";
   completionDate.value = "";
-  submissionDate.value = "";
-  completionStatus = ""
 }
 
 const formValidation = () => {
   error = [...errorMessage];
   if (title.value === '') {
     error[0].innerHTML =  '* Title should not be empty';
-  }else{
+  } else{
     error[0].innerHTML = '';
   }
+
   if (description.value === '') {
     error[1].innerHTML = '* Description should not be empty';
-  }else{
+  } else{
     error[1].innerHTML = '';
   }
+
   if (completionDate.value === '') {
     error[2].innerHTML = '* Completion Date should not empty';
-  }else{
+  } else{
     error[2].innerHTML = '';
   }
+
+  // if (submissionDate.value === '') {
+  //   error[3].innerHTML = '* Submission Date cannot be empty';
+  // } else {
+  //   error[3].innerHTML = '';
+  // }
 
   if (description.value !== '' && title.value !== '' && completionDate.value !== '') {
     AddTask();
