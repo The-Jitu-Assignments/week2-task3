@@ -94,7 +94,7 @@ const tasksUI = (data) => {
             </div>
           <div class="task--card__time">
             <div class="task--submission">
-                <span>CompleteStatus:</span>
+                <span>SubmissionStatus:</span>
                 <span class="task--status">${taskStatus}</span>
               </div>
               <div class="task--days">
