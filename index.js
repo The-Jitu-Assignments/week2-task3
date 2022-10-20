@@ -7,26 +7,21 @@ const form = document.querySelector(".form");
 const errorMessage = document.querySelectorAll(".error--msg");
 const completeElement = document.getElementsByName('task_completion');
 const taskCheckbox = document.querySelector("#task--checkbox");
-const taskHeader = document.querySelector(".task--item__header");
+const allTasks = document.querySelector('.btn--all');
+const completeTasks = document.querySelector('.btn--complete');
+const inCompleteTasks = document.querySelector('.btn--incomplete');
+const resetBtn = document.querySelector('.reset');
 
 let completionStatus = '';
 
-let tasks = []
+let tasks = [];
+tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
 let error = [];
+
 
 const idGenerator = () => {
   return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1) // generating a 4-digit password
-};
-
-// saving the item you want to update so as to populate the data
-const saveCurrentItem = (title, description, completionDate, completionStatus, submissionDate) => {
-  if (window.localStorage) {
-    localStorage.taskTitle = title;
-    localStorage.taskDescription = description;
-    localStorage.completionDate = completionDate;
-    localStorage.completionStatus = completionStatus;
-    localStorage.submissionDate = submissionDate;
-  }
 };
 
 // creating a new task.
@@ -38,7 +33,7 @@ const AddTask = () => {
   }
 
   // checking if there is any tasks in the localstorage if non tasks will be an empty array.
-  tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
 
   tasks.push({
     id: idGenerator(),
@@ -46,10 +41,10 @@ const AddTask = () => {
     description: description.value,
     completionDate: completionDate.value,
     completionStatus: false,
-    // submissionDate: submissionDate.value
   });
 
   localStorage.setItem('tasks', JSON.stringify(tasks));
+
   displayTasks();
 };
 
@@ -57,17 +52,20 @@ const AddTask = () => {
 const displayTasks = () => {
   let fetchedTasks = localStorage.getItem('tasks');
   let tasks = JSON.parse(fetchedTasks);
+  handleTaskStatus();
   tasksUI(tasks);
   resetForm();
 };
 
+
 const tasksUI = (data) => {
   let checkedStatus = false;
+  let correctDays = true;
   let results = '';
 
   if (data.length === 0) {
     results = `<div class="task--empty">
-      😟 Currently you do not have any task.
+      😟 Currently you do not have any task here.
     </div>`
   }
   data.map((task) => {
@@ -81,17 +79,19 @@ const tasksUI = (data) => {
     let diffDays = Math.ceil(Math.abs(difference) / (1000 * 60 * 60 * 24));
     if (difference < 0) {
       taskStatus = 'Submitted on Time';
+      correctDays = true;
     } else if (difference === 0) {
       diffDays = 1;
       taskStatus = 'Submitted on Time';
-    }
-    else {
+      correctDays = true;
+    } else if (difference > 0) {
       taskStatus = 'Submitted Late';
-    };
-
-    console.log(checkedStatus)
-
-    // <span class="task--status">${task.completionStatus}</span>
+       correctDays = true;
+    } else {
+      taskStatus = 'Still Pending';
+      correctDays = false;
+    }
+    
     if (data) {
       results += `
           <div class="task--card" id=${task.id}>
@@ -100,6 +100,7 @@ const tasksUI = (data) => {
             <input type="checkbox" onchange="editStatus(this)" id="task--checkbox" ${checkedStatus ? 'checked' : ''}>
           </div>
             <div class="task--card__description">
+              <p></ 
               <p class="card--description">
                 ${task.description}
             </p>
@@ -119,10 +120,12 @@ const tasksUI = (data) => {
                 <span>SubmissionStatus:</span>
                 <span class="task--status">${taskStatus}</span>
               </div>
-              <div class="task--days">
-                <span>By:</span>
-              <span class="task--status">${diffDays > 1 ? diffDays + ' days': diffDays + ' day'}</span>
-              </div>
+              ${correctDays ? `
+                  <div class="task--days">
+                    <span>By:</span>
+                  <span class="task--status">${diffDays > 1 ? diffDays + ' days': diffDays + ' day'}</span>
+                  </div>
+              ` : ''}
             </div>
           </div>
       `;
@@ -131,24 +134,50 @@ const tasksUI = (data) => {
   taskCardContainer.innerHTML = results;
 }
 
+const handleTaskStatus = () => {
+  let completedTasks = tasks.filter((task) => task.completionStatus === true);
+
+  console.log(completedTasks)
+
+  let incompletedTasks = tasks.filter((task) => task.completionStatus === false);
+    
+    completeTasks.onclick = () => {
+      displayTasks()
+      tasksUI(completedTasks);
+    }
+
+    inCompleteTasks.onclick = () => {
+      displayTasks();
+      tasksUI(incompletedTasks);
+    }
+
+    allTasks.onclick = () => {
+      displayTasks();
+      tasksUI(tasks);
+    }
+}
+
+handleTaskStatus();
+
 const editStatus = (e) => {
   let selected = e.parentElement.parentElement;
   let selectedHeader = selected.children[0];
   let inputBox = selectedHeader.children[1];
 
-
-  if (inputBox.checked) {
-    console.log('cheked')
-  } else {
-    console.log('unchecked')
-  }
-  console.log(selectedHeader.children[1]);
   tasks = JSON.parse(localStorage.getItem('tasks'));
   const foundTask = tasks.find((task) => task.id === selected.id);
 
-  tasks = tasks.map((task) => task.id === foundTask.id ? { ...task, completionStatus: true } : task);
+  if (inputBox.checked) {
+    tasks = tasks.map((task) => task.id === foundTask.id ? { ...task, completionStatus: true, submissionDate: new Date() } : task);
+  } else {
+    tasks = tasks.map((task) => task.id === foundTask.id ? { ...task, completionStatus: false, submissionDate: '' } : task);
+  }
 
-  localStorage.setItem('tasks', JSON.stringify(tasks))
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+
+  // tasksUI(tasks)
+
+  displayTasks();
 }
 
 // update task details
@@ -156,23 +185,17 @@ const editTask = (e) => {
   let selectedTask = e.parentElement.parentElement;
   tasks = JSON.parse(localStorage.getItem('tasks'));
   const currentTask = tasks.find((task) => task.id === selectedTask.id);
-  const { 
+
+  console.log(currentTask);
+  let  { 
     title: currentTaskTitle, 
     description: currentTaskDescription, 
-    completionDate: currentTaskCompletionDate, 
-    completionStatus: currentTaskCompletionStatus, 
-    submissionDate: currentTaskSubmissionDate 
+    completionDate: currentTaskCompletionDate,
   } = currentTask;
 
-  saveCurrentItem(currentTaskTitle, currentTaskDescription, currentTaskCompletionDate, currentTaskCompletionStatus, currentTaskSubmissionDate);
-
-  let header = selectedTask.children[0];
-  let cardDescription = selectedTask.children[1];
-  
-  title.value = header.children[0].innerHTML;
-  description.value = cardDescription.children[0].innerHTML.trim();
+  title.value = currentTaskTitle;
+  description.value = currentTaskDescription;
   completionDate.value = currentTaskCompletionDate;
-  submissionDate.value = currentTaskSubmissionDate;
 
   deleteTask(e);
 }
@@ -182,6 +205,7 @@ const deleteTask = (e) => {
   e.parentElement.parentElement.remove();
   tasks = tasks.filter((task) => task.id !== e.parentElement.parentElement.id);
   localStorage.setItem('tasks', JSON.stringify(tasks));
+  handleTaskStatus();
 };
 
 
@@ -210,15 +234,16 @@ const formValidation = () => {
   } else{
     error[2].innerHTML = '';
   }
-
-  // if (submissionDate.value === '') {
-  //   error[3].innerHTML = '* Submission Date cannot be empty';
-  // } else {
-  //   error[3].innerHTML = '';
-  // }
-
+  
   if (description.value !== '' && title.value !== '' && completionDate.value !== '') {
     AddTask();
+  }
+}
+
+resetBtn.onclick = () => {
+  error = [...errorMessage];
+  for (let i = 0; i < error.length; i++) {
+    error[i].innerHTML = '';
   }
 }
 

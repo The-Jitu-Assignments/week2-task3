@@ -61,25 +61,38 @@ body {
   flex: wrap;
   font-size: 2rem;
   color: var(--darkBlueColor);
-  /* animation: show linear 3s infinite; */
+  animation: show linear 5s infinite;
   height: 100%;
+}
+
+.task--links {
+  display: flex;
+  justify-content: space-between;
+  /* padding: 0 1rem; */
+}
+
+.task--links__btn {
+  cursor: pointer;
+  background-color: var(--blueColor);
+  color: white;
+  padding: 5px 10px;
 }
 
 @keyframes show {
   0% {
-    font-size: 1rem;
+    opacity: 0;
   }
   25% {
-    font-size: 1.5rem;
+    opacity: 0.5;
   }
   50% {
-    font-size: 2rem;
+    opacity: 1;
   }
   75% {
-    font-size: 1.5rem;
+    opacity: 0.5;
   }
   100% {
-    font-size: 1rem;
+    opacity: 0;
   }
 }
 
