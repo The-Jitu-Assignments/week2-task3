@@ -2,6 +2,8 @@
 
 Users can add a new task and specify the day the task should be completed.
 
+![Task management app](https://github.com/The-Jitu-Assignments/week2-task3/blob/master/images/screencapture-127-0-0-1-5500-index-html-2022-11-26-07_16_06.png)
+
 ### Functionality
 
 - Create a new task with title, description and completion date.
